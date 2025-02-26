@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>WASI File Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <h1>WASI File Demo</h1>
+    <!-- File input for selecting a file -->
+    <p>Select a file to pass to the WASM module (it will be available as "/input.txt"):</p>
+    <input type="file" id="fileInput" />
+    <!-- Button to trigger the WASM module -->
+    <button id="runWasm">Run WASM Module with Selected File</button>
+    <!-- Container for output -->
+    <div id="output"></div>
+
+    <script type="module">
+        // Import our exported functions.
+        import { hello, runWasmModuleWithFile } from '/index.esm.js';
+
+        // Show a greeting.
+        const greeting = hello('world');
+        console.log(greeting);
+        document.getElementById('output').innerHTML += `<p>${greeting}</p>`;
+
+        // Get references to the file input and button.
+        const fileInput = document.getElementById('fileInput');
+        const runButton = document.getElementById('runWasm');
+
+        runButton.addEventListener('click', async () => {
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please select a file first.');
+                return;
+            }
+            // Use the first selected file.
+            const file = fileInput.files[0];
+            // Run the WASM module with the selected file.
+            await runWasmModuleWithFile(file);
+        });
+    </script>
+</body>
+
+</html>
