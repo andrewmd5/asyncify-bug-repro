@@ -1003,7 +1003,7 @@ var r = class {
   }
   init(t2, e2) {
     const { exports: r2 } = t2, n = r2.memory || e2.env && e2.env.memory;
-    new Int32Array(n.buffer, 16).set([24, 8388608]), this.exports = this.wrapExports(r2), Object.setPrototypeOf(t2, s.prototype);
+    new Int32Array(n.buffer, 16).set([24, 1024]), this.exports = this.wrapExports(r2), Object.setPrototypeOf(t2, s.prototype);
   }
 };
 var s = class extends WebAssembly.Instance {
