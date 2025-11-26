@@ -12,12 +12,11 @@ int asyncjmp_rt_start(int(main)(int argc, char **argv), int argc, char **argv)
     {
         result = main(argc, argv);
 
-        extern void *pl_asyncify_unwind_buf;
+         extern void *pl_asyncify_unwind_buf;
         // Exit Asyncify loop if there is no unwound buffer, which
         // means that main function has returned normally.
-        if (pl_asyncify_unwind_buf == NULL)
-        {
-            break;
+        if (pl_asyncify_unwind_buf == NULL) {
+          break;
         }
 
         // NOTE: it's important to call 'asyncify_stop_unwind' here instead in
